@@ -1,3 +1,5 @@
 exports.proyectosIndex = ((req, res) => {
-  return res.render('index');
+  return res.render('index', {
+    nombrePagina: 'Proyectos'
+  });
 });
