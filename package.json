@@ -1,0 +1,26 @@
+{
+  "name": "uptask",
+  "version": "1.0.0",
+  "description": "NodeJS MVC",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "NodeJS",
+    "MVC",
+    "Back-End"
+  ],
+  "author": "Acxel Morales",
+  "license": "ISC",
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
+  }
+}
