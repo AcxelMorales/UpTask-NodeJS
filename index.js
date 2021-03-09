@@ -4,6 +4,13 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
 
+const db = require('./config/db');
+require('./models/Proyecto.model');
+
+db.sync()
+  .then(() => console.log('Conectado a la base de datos'))
+  .catch(error => console.log('Error en la conexión a la base de datos', error))
+
 const app = express();
 
 app.use(express.static('public'));
