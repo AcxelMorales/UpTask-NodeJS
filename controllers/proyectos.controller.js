@@ -1,3 +1,5 @@
+const Proyecto = require('../models/Proyecto.model');
+
 exports.proyectosIndex = (req, res) => {
   return res.render('index', {
     nombrePagina: 'Proyectos'
@@ -10,7 +12,7 @@ exports.formularioProyecto = (req, res) => {
   });
 };
 
-exports.nuevoProyecto = (req, res) => {
+exports.nuevoProyecto = async (req, res, next) => {
   const { nombre } = req.body;
   let errores = [];
 
@@ -25,5 +27,16 @@ exports.nuevoProyecto = (req, res) => {
       nombrePagina: 'Nuevo proyecto',
       errores
     });
+  } else {
+    try {
+      await Proyecto.create({
+        nombre
+      });
+
+      return res.redirect('/');
+    } catch (error) {
+      console.log('Error', error);
+      next(error);
+    }
   }
 };
