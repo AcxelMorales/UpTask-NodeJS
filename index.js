@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
 
+const helpers = require('./helpers');
 const db = require('./config/db');
 require('./models/Proyecto.model');
 
@@ -18,6 +19,11 @@ app.use(express.static('public'));
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
+
+app.use((req, res, next) => {
+  res.locals.vardump = helpers.vardum;
+  next();
+});
 
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: true }));

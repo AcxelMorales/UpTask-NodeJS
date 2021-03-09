@@ -16,4 +16,6 @@ router.post(
   proyectosController.nuevoProyecto
 );
 
+router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
+
 module.exports = router;

@@ -20,10 +20,8 @@ html(lang="en")
         .panel.lista-proyectos
           h2 Proyectos
           ul#proyectos.proyectos
-            li
-              a(href="#") App en React Native
-            li
-              a(href="#") App en Flutter
-            li
-              a(href="#") App en Kotlin
+            if proyectos
+              each p in proyectos
+                li
+                  a(href=`/proyectos/${p.url}`)= p.nombre
       block contenido

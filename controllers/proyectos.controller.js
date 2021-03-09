@@ -1,14 +1,25 @@
 const Proyecto = require('../models/Proyecto.model');
 
-exports.proyectosIndex = (req, res) => {
-  return res.render('index', {
-    nombrePagina: 'Proyectos'
-  });
+exports.proyectosIndex = async (req, res, next) => {
+  try {
+    const proyectos = await Proyecto.findAll();
+
+    return res.render('index', {
+      nombrePagina: 'Proyectos',
+      proyectos
+    });
+  } catch (error) {
+    console.log('Error', error);
+    next(error);
+  }
 };
 
-exports.formularioProyecto = (req, res) => {
+exports.formularioProyecto = async (req, res) => {
+  const proyectos = await Proyecto.findAll();
+
   return res.render('nuevoProyecto', {
-    nombrePagina: 'Nuevo Proyecto'
+    nombrePagina: 'Nuevo Proyecto',
+    proyectos
   });
 };
 
@@ -23,9 +34,12 @@ exports.nuevoProyecto = async (req, res, next) => {
   }
 
   if (errores.length > 0) {
+    const proyectos = await Proyecto.findAll();
+
     return res.render('nuevoProyecto', {
       nombrePagina: 'Nuevo proyecto',
-      errores
+      errores,
+      proyectos
     });
   } else {
     try {
@@ -38,5 +52,28 @@ exports.nuevoProyecto = async (req, res, next) => {
       console.log('Error', error);
       next(error);
     }
+  }
+};
+
+exports.proyectoPorUrl = async (req, res, next) => {
+  try {
+    const proyectos = await Proyecto.findAll();
+
+    const proyecto = await Proyecto.findOne({
+      where: {
+        url: req.params.url
+      }
+    });
+
+    if (!proyecto) return next();
+
+    return res.render('tareas', {
+      nombrePagina: 'Tareas del proyecto',
+      proyecto,
+      proyectos
+    });
+  } catch (error) {
+    console.log('Error', error);
+    next(error);
   }
 };
