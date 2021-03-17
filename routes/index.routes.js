@@ -26,4 +26,6 @@ router.post(
   proyectosController.nuevoProyecto
 );
 
+router.delete('/proyectos/:url', proyectosController.eliminarProyecto);
+
 module.exports = router;

@@ -119,3 +119,17 @@ exports.formularioProyecto = async (req, res) => {
     proyectos
   });
 };
+
+exports.eliminarProyecto = async (req, res, next) => {
+  const { urlProyecto } = req.query;
+
+  const result = await Proyecto.destroy({
+    where: {
+      url: urlProyecto
+    }
+  });
+
+  if (!result) return next();
+
+  res.status(200).send('Proyecto eliminado correctamente');
+};

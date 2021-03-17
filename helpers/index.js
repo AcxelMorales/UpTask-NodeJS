@@ -1,1 +1,1 @@
-exports.vardum = (obj) => JSON.stringify(obj, null, 2);
+exports.vardump = (obj) => JSON.stringify(obj, null, 2);
