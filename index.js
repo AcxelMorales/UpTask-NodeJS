@@ -6,7 +6,9 @@ const morgan = require('morgan');
 
 const helpers = require('./helpers');
 const db = require('./config/db');
+
 require('./models/Proyecto.model');
+require('./models/Tarea.model');
 
 db.sync()
   .then(() => console.log('Conectado a la base de datos'))
